@@ -10,15 +10,20 @@ import uuid
 
 class FileProcessor:
     def __init__(self):
-        # Create a base directory in the user's home directory for persistent storage
-        self.base_dir = os.path.expanduser('~/MusicSynth')
-        self.temp_dir = os.path.join(self.base_dir, 'temp')
-        self.xml_dir = os.path.join(self.base_dir, 'xml_files')
+        # Get the project root directory (where app.py is located)
+        self.project_dir = os.path.dirname(os.path.abspath(__file__))
         
-        # Create necessary directories
-        os.makedirs(self.base_dir, exist_ok=True)
-        os.makedirs(self.temp_dir, exist_ok=True)
-        os.makedirs(self.xml_dir, exist_ok=True)
+        # Create temp and xml directories in the project folder
+        self.temp_dir = os.path.join(self.project_dir, 'temp')
+        self.xml_dir = os.path.join(self.project_dir, 'xml_files')
+        
+        # Create necessary directories with proper permissions
+        for directory in [self.temp_dir, self.xml_dir]:
+            if not os.path.exists(directory):
+                os.makedirs(directory, mode=0o777, exist_ok=True)
+            else:
+                # Ensure existing directories have proper permissions
+                os.chmod(directory, 0o777)
         
         self.timing_stats = {}
         
@@ -63,7 +68,7 @@ class FileProcessor:
             # Create a unique session directory using UUID
             session_id = str(uuid.uuid4())
             session_dir = os.path.join(self.temp_dir, f"session_{session_id}")
-            os.makedirs(session_dir, exist_ok=True)
+            os.makedirs(session_dir, mode=0o777, exist_ok=True)
             print(f"Created session directory: {session_dir}")
             
             # Save the uploaded file to the session directory
@@ -72,6 +77,8 @@ class FileProcessor:
             print(f"Saving uploaded file to: {temp_file_path}")
             with open(temp_file_path, 'wb') as f:
                 f.write(uploaded_file.getbuffer())
+            # Ensure file has proper permissions
+            os.chmod(temp_file_path, 0o666)
             self.timing_stats['file_save'] = time.time() - save_start
             
             # If image, process it based on environment
@@ -102,6 +109,7 @@ class FileProcessor:
                     xml_filename = f"{basename}_{session_id}.musicxml"
                     xml_save_path = os.path.join(self.xml_dir, xml_filename)
                     shutil.copy2(musicxml_path, xml_save_path)
+                    os.chmod(xml_save_path, 0o666)  # Ensure XML file has proper permissions
                     print(f"Saved MusicXML file to: {xml_save_path}")
                     
                     print(f"Oemer produced MusicXML file: {musicxml_path}")
@@ -112,6 +120,7 @@ class FileProcessor:
                 xml_filename = f"{os.path.splitext(os.path.basename(musicxml_path))[0]}_{session_id}.musicxml"
                 xml_save_path = os.path.join(self.xml_dir, xml_filename)
                 shutil.copy2(musicxml_path, xml_save_path)
+                os.chmod(xml_save_path, 0o666)  # Ensure XML file has proper permissions
                 print(f"Saved MusicXML file to: {xml_save_path}")
                 print(f"Using uploaded MusicXML file: {musicxml_path}")
             
@@ -127,6 +136,7 @@ class FileProcessor:
             print(f"Generating video: {output_path}")
             video_start = time.time()
             make_video(notes, output_file=output_path)
+            os.chmod(output_path, 0o666)  # Ensure video file has proper permissions
             self.timing_stats['video_generation'] = time.time() - video_start
             
             # Log timing statistics
@@ -146,8 +156,8 @@ class FileProcessor:
                 item_path = os.path.join(self.temp_dir, item)
                 if os.path.isdir(item_path) and item.startswith('session_'):
                     shutil.rmtree(item_path, ignore_errors=True)
-            # Recreate the base temp directory
-            os.makedirs(self.temp_dir, exist_ok=True)
+            # Recreate the base temp directory with proper permissions
+            os.makedirs(self.temp_dir, mode=0o777, exist_ok=True)
         except Exception as e:
             print(f"Error during cleanup: {str(e)}")
     
@@ -161,4 +171,5 @@ class FileProcessor:
         
         log_path = os.path.join(session_dir, 'processing_stats.log')
         with open(log_path, 'a') as f:
-            f.write(log_entry) 
+            f.write(log_entry)
+        os.chmod(log_path, 0o666)  # Ensure log file has proper permissions 
