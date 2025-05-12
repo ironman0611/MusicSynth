@@ -7,16 +7,9 @@ import streamlit as st
 from synthesia import parse_musicxml, make_video
 import shutil
 import uuid
-from moviepy.editor import VideoClip, ImageClip, CompositeVideoClip
-import moviepy.config as mp_config
 
 class FileProcessor:
     def __init__(self):
-        # Configure ImageMagick for Streamlit Cloud
-        if os.environ.get('STREAMLIT_SERVER_ENVIRONMENT') == 'cloud':
-            # Set ImageMagick binary path for Linux environment
-            mp_config.change_settings({"IMAGEMAGICK_BINARY": "convert"})
-        
         # Get the project root directory (where app.py is located)
         self.project_dir = os.path.dirname(os.path.abspath(__file__))
         
