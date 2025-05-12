@@ -8,7 +8,7 @@ import os
 import xml.etree.ElementTree as ET
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-from moviepy import *
+from moviepy.editor import VideoClip, ImageClip, CompositeVideoClip
 
 # Violin string notes (G3, D4, A4, E5)
 VIOLIN_STRINGS = ["G", "D", "A", "E"]
@@ -264,8 +264,12 @@ def make_video(notes, output_file="violin_tutorial.mp4", fps=30, duration=None):
         last_note = notes[-1]
         duration = last_note["start_time"] + last_note["duration"] + 1  # Add 1 second buffer at the end
     
+    def make_frame(t):
+        frame = create_fingerboard_frame(notes, t)
+        return frame
+    
     # Create a clip using MoviePy
-    clip = VideoClip(lambda t: create_fingerboard_frame(notes, t), duration=duration)
+    clip = VideoClip(make_frame, duration=duration)
     
     # Set the frame rate
     clip = clip.with_fps(fps)
