@@ -3,7 +3,6 @@ pillow==10.2.0
 tensorflow==2.16.1
 streamlit==1.32.2
 moviepy==1.0.3
-imagemagick==0.7.1
 oemer==0.1.5
 onnx==1.15.0
 onnxruntime==1.17.0
