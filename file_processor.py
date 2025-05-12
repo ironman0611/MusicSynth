@@ -5,22 +5,29 @@ import time
 from datetime import datetime
 import streamlit as st
 from synthesia import parse_musicxml, make_video
+import shutil
+import uuid
 
 class FileProcessor:
     def __init__(self):
-        # Use Streamlit's temporary directory
-        self.temp_dir = os.path.join(tempfile.gettempdir(), 'musicsynth')
+        # Create a base directory in the user's home directory for persistent storage
+        self.base_dir = os.path.expanduser('~/MusicSynth')
+        self.temp_dir = os.path.join(self.base_dir, 'temp')
+        self.xml_dir = os.path.join(self.base_dir, 'xml_files')
+        
+        # Create necessary directories
+        os.makedirs(self.base_dir, exist_ok=True)
         os.makedirs(self.temp_dir, exist_ok=True)
+        os.makedirs(self.xml_dir, exist_ok=True)
+        
         self.timing_stats = {}
         
         # Check if we're running in Streamlit Cloud
         is_streamlit_cloud = os.environ.get('STREAMLIT_SERVER_ENVIRONMENT') == 'cloud'
         
         if is_streamlit_cloud:
-            # For Streamlit Cloud, we'll use a different approach for OMR
             self.use_cloud_omr = True
         else:
-            # For local development, use Oemer
             try:
                 result = subprocess.run(["which", "oemer"], capture_output=True, text=True)
                 if result.returncode != 0:
@@ -53,9 +60,15 @@ class FileProcessor:
             return False, "Please upload a MusicXML file (.musicxml, .xml) or an image file (.png, .jpg, .jpeg)", None
         
         try:
-            # Save the uploaded file to a temporary location
+            # Create a unique session directory using UUID
+            session_id = str(uuid.uuid4())
+            session_dir = os.path.join(self.temp_dir, f"session_{session_id}")
+            os.makedirs(session_dir, exist_ok=True)
+            print(f"Created session directory: {session_dir}")
+            
+            # Save the uploaded file to the session directory
             save_start = time.time()
-            temp_file_path = os.path.join(self.temp_dir, uploaded_file.name)
+            temp_file_path = os.path.join(session_dir, uploaded_file.name)
             print(f"Saving uploaded file to: {temp_file_path}")
             with open(temp_file_path, 'wb') as f:
                 f.write(uploaded_file.getbuffer())
@@ -64,13 +77,11 @@ class FileProcessor:
             # If image, process it based on environment
             if is_image:
                 if self.use_cloud_omr:
-                    # For Streamlit Cloud, we'll use a simpler approach
-                    # You might want to implement a cloud-based OMR service here
                     return False, "Image processing is currently not supported in the cloud environment. Please upload a MusicXML file instead.", None
                 else:
                     # Use Oemer for local processing
                     print(f"Running Oemer on image: {temp_file_path}")
-                    cmd = [self.oemer_path, "-o", self.temp_dir, "--save-cache", "-d", temp_file_path]
+                    cmd = [self.oemer_path, "-o", session_dir, "--save-cache", "-d", temp_file_path]
                     oemer_start = time.time()
                     result = subprocess.run(cmd, capture_output=True, text=True)
                     if result.returncode != 0:
@@ -80,16 +91,28 @@ class FileProcessor:
                     
                     # Find the output MusicXML file
                     basename = os.path.splitext(os.path.basename(temp_file_path))[0]
-                    musicxml_path = os.path.join(self.temp_dir, f"{basename}.musicxml")
+                    musicxml_path = os.path.join(session_dir, f"{basename}.musicxml")
                     if not os.path.exists(musicxml_path):
-                        musicxml_path = os.path.join(self.temp_dir, f"{basename}.xml")
+                        musicxml_path = os.path.join(session_dir, f"{basename}.xml")
                         if not os.path.exists(musicxml_path):
                             print(f"Oemer did not produce a MusicXML file for {basename}")
                             return False, f"Oemer did not produce a MusicXML file for {basename}", None
+                    
+                    # Save a copy of the MusicXML file in the xml_files directory
+                    xml_filename = f"{basename}_{session_id}.musicxml"
+                    xml_save_path = os.path.join(self.xml_dir, xml_filename)
+                    shutil.copy2(musicxml_path, xml_save_path)
+                    print(f"Saved MusicXML file to: {xml_save_path}")
+                    
                     print(f"Oemer produced MusicXML file: {musicxml_path}")
             else:
                 # Use the uploaded MusicXML file
                 musicxml_path = temp_file_path
+                # Save a copy in the xml_files directory
+                xml_filename = f"{os.path.splitext(os.path.basename(musicxml_path))[0]}_{session_id}.musicxml"
+                xml_save_path = os.path.join(self.xml_dir, xml_filename)
+                shutil.copy2(musicxml_path, xml_save_path)
+                print(f"Saved MusicXML file to: {xml_save_path}")
                 print(f"Using uploaded MusicXML file: {musicxml_path}")
             
             # Parse the MusicXML file
@@ -98,7 +121,7 @@ class FileProcessor:
             
             # Generate output video path
             output_filename = os.path.splitext(os.path.basename(musicxml_path))[0] + '_visualization.mp4'
-            output_path = os.path.join(self.temp_dir, output_filename)
+            output_path = os.path.join(session_dir, output_filename)
             
             # Create the video
             print(f"Generating video: {output_path}")
@@ -107,7 +130,7 @@ class FileProcessor:
             self.timing_stats['video_generation'] = time.time() - video_start
             
             # Log timing statistics
-            self._log_timing_stats(uploaded_file.name)
+            self._log_timing_stats(uploaded_file.name, session_dir)
             
             return True, "Video generated successfully", output_path
             
@@ -117,14 +140,18 @@ class FileProcessor:
         
     def cleanup(self):
         """Clean up temporary files"""
-        import shutil
         try:
-            shutil.rmtree(self.temp_dir, ignore_errors=True)
+            # Clean up all session directories
+            for item in os.listdir(self.temp_dir):
+                item_path = os.path.join(self.temp_dir, item)
+                if os.path.isdir(item_path) and item.startswith('session_'):
+                    shutil.rmtree(item_path, ignore_errors=True)
+            # Recreate the base temp directory
             os.makedirs(self.temp_dir, exist_ok=True)
         except Exception as e:
             print(f"Error during cleanup: {str(e)}")
     
-    def _log_timing_stats(self, filename):
+    def _log_timing_stats(self, filename, session_dir):
         """Log timing statistics to a file."""
         log_entry = f"\n{datetime.now()}\n"
         log_entry += f"File: {filename}\n"
@@ -132,6 +159,6 @@ class FileProcessor:
             log_entry += f"{step}: {duration:.2f} seconds\n"
         log_entry += "-" * 50
         
-        log_path = os.path.join(self.temp_dir, 'processing_stats.log')
+        log_path = os.path.join(session_dir, 'processing_stats.log')
         with open(log_path, 'a') as f:
             f.write(log_entry) 
