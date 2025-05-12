@@ -17,6 +17,20 @@ import time
 from datetime import datetime
 import shutil
 import uuid
+import moviepy.config as mp_config
+
+# Configure ImageMagick for Streamlit Cloud
+if os.environ.get('STREAMLIT_SERVER_ENVIRONMENT') == 'cloud':
+    # Set ImageMagick binary path for Streamlit Cloud
+    mp_config.change_settings({"IMAGEMAGICK_BINARY": "convert"})
+else:
+    # Try to find ImageMagick in common locations
+    try:
+        result = subprocess.run(["which", "convert"], capture_output=True, text=True)
+        if result.returncode == 0:
+            mp_config.change_settings({"IMAGEMAGICK_BINARY": result.stdout.strip()})
+    except Exception as e:
+        print(f"Warning: Could not find ImageMagick: {e}")
 
 # Violin string notes (G3, D4, A4, E5)
 VIOLIN_STRINGS = ["G", "D", "A", "E"]
