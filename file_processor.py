@@ -3,18 +3,34 @@ import tempfile
 import subprocess
 import time
 from datetime import datetime
+import streamlit as st
 from synthesia import parse_musicxml, make_video
 
 class FileProcessor:
     def __init__(self):
-        self.temp_dir = tempfile.mkdtemp()
+        # Use Streamlit's temporary directory
+        self.temp_dir = os.path.join(tempfile.gettempdir(), 'musicsynth')
+        os.makedirs(self.temp_dir, exist_ok=True)
         self.timing_stats = {}
-        # Find the full path to the oemer executable
-        result = subprocess.run(["which", "oemer"], capture_output=True, text=True)
-        if result.returncode != 0:
-            raise RuntimeError("Oemer executable not found. Please ensure it is installed and in your PATH.")
-        self.oemer_path = result.stdout.strip()
-        print(f"Oemer path: {self.oemer_path}")
+        
+        # Check if we're running in Streamlit Cloud
+        is_streamlit_cloud = os.environ.get('STREAMLIT_SERVER_ENVIRONMENT') == 'cloud'
+        
+        if is_streamlit_cloud:
+            # For Streamlit Cloud, we'll use a different approach for OMR
+            self.use_cloud_omr = True
+        else:
+            # For local development, use Oemer
+            try:
+                result = subprocess.run(["which", "oemer"], capture_output=True, text=True)
+                if result.returncode != 0:
+                    raise RuntimeError("Oemer executable not found. Please ensure it is installed and in your PATH.")
+                self.oemer_path = result.stdout.strip()
+                self.use_cloud_omr = False
+                print(f"Oemer path: {self.oemer_path}")
+            except Exception as e:
+                print(f"Error setting up Oemer: {str(e)}")
+                self.use_cloud_omr = True
     
     def process_uploaded_file(self, uploaded_file):
         """
@@ -45,27 +61,32 @@ class FileProcessor:
                 f.write(uploaded_file.getbuffer())
             self.timing_stats['file_save'] = time.time() - save_start
             
-            # If image, run Oemer to get MusicXML
+            # If image, process it based on environment
             if is_image:
-                print(f"Running Oemer on image: {temp_file_path}")
-                # Call oemer CLI using the full path with correct flags
-                cmd = [self.oemer_path, "-o", self.temp_dir, "--save-cache", "-d", temp_file_path]
-                oemer_start = time.time()
-                result = subprocess.run(cmd, capture_output=True, text=True)
-                if result.returncode != 0:
-                    print(f"Oemer failed with error: {result.stderr}")
-                    return False, f"Oemer failed: {result.stderr}", None
-                self.timing_stats['oemer_processing'] = time.time() - oemer_start
-                # Find the output MusicXML file
-                basename = os.path.splitext(os.path.basename(temp_file_path))[0]
-                musicxml_path = os.path.join(self.temp_dir, f"{basename}.musicxml")
-                if not os.path.exists(musicxml_path):
-                    # Sometimes oemer may output .xml instead
-                    musicxml_path = os.path.join(self.temp_dir, f"{basename}.xml")
+                if self.use_cloud_omr:
+                    # For Streamlit Cloud, we'll use a simpler approach
+                    # You might want to implement a cloud-based OMR service here
+                    return False, "Image processing is currently not supported in the cloud environment. Please upload a MusicXML file instead.", None
+                else:
+                    # Use Oemer for local processing
+                    print(f"Running Oemer on image: {temp_file_path}")
+                    cmd = [self.oemer_path, "-o", self.temp_dir, "--save-cache", "-d", temp_file_path]
+                    oemer_start = time.time()
+                    result = subprocess.run(cmd, capture_output=True, text=True)
+                    if result.returncode != 0:
+                        print(f"Oemer failed with error: {result.stderr}")
+                        return False, f"Oemer failed: {result.stderr}", None
+                    self.timing_stats['oemer_processing'] = time.time() - oemer_start
+                    
+                    # Find the output MusicXML file
+                    basename = os.path.splitext(os.path.basename(temp_file_path))[0]
+                    musicxml_path = os.path.join(self.temp_dir, f"{basename}.musicxml")
                     if not os.path.exists(musicxml_path):
-                        print(f"Oemer did not produce a MusicXML file for {basename}")
-                        return False, f"Oemer did not produce a MusicXML file for {basename}", None
-                print(f"Oemer produced MusicXML file: {musicxml_path}")
+                        musicxml_path = os.path.join(self.temp_dir, f"{basename}.xml")
+                        if not os.path.exists(musicxml_path):
+                            print(f"Oemer did not produce a MusicXML file for {basename}")
+                            return False, f"Oemer did not produce a MusicXML file for {basename}", None
+                    print(f"Oemer produced MusicXML file: {musicxml_path}")
             else:
                 # Use the uploaded MusicXML file
                 musicxml_path = temp_file_path
@@ -97,7 +118,11 @@ class FileProcessor:
     def cleanup(self):
         """Clean up temporary files"""
         import shutil
-        shutil.rmtree(self.temp_dir, ignore_errors=True)
+        try:
+            shutil.rmtree(self.temp_dir, ignore_errors=True)
+            os.makedirs(self.temp_dir, exist_ok=True)
+        except Exception as e:
+            print(f"Error during cleanup: {str(e)}")
     
     def _log_timing_stats(self, filename):
         """Log timing statistics to a file."""
@@ -107,5 +132,6 @@ class FileProcessor:
             log_entry += f"{step}: {duration:.2f} seconds\n"
         log_entry += "-" * 50
         
-        with open('processing_stats.log', 'a') as f:
+        log_path = os.path.join(self.temp_dir, 'processing_stats.log')
+        with open(log_path, 'a') as f:
             f.write(log_entry) 

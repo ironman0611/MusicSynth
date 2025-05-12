@@ -5,17 +5,29 @@ import time
 from datetime import datetime
 import pandas as pd
 
+# Set page config
+st.set_page_config(
+    page_title="MusicSynth",
+    page_icon="🎵",
+    layout="wide"
+)
+
 # Initialize session state for file processor if it doesn't exist
 if 'file_processor' not in st.session_state:
     st.session_state.file_processor = FileProcessor()
 
-st.title("Violin Music Visualizer")
+st.title("🎵 MusicSynth - Sheet Music Visualizer")
+
+# Add environment info
+is_cloud = os.environ.get('STREAMLIT_SERVER_ENVIRONMENT') == 'cloud'
+if is_cloud:
+    st.info("Running in Streamlit Cloud environment. Image processing is not available. Please upload MusicXML files only.")
 
 # File upload section
 st.header("Upload MusicXML or Image File")
 uploaded_file = st.file_uploader(
     "Choose a MusicXML file (.musicxml, .xml) or an image file (.png, .jpg, .jpeg)",
-    type=['musicxml', 'xml', 'png', 'jpg', 'jpeg']
+    type=['musicxml', 'xml', 'png', 'jpg', 'jpeg'] if not is_cloud else ['musicxml', 'xml']
 )
 
 if uploaded_file is not None:
@@ -65,7 +77,8 @@ if uploaded_file is not None:
             log_entry += f"Total Time: {timing_stats['total_time']:.2f} seconds\n"
             log_entry += "-" * 50
             
-            with open('processing_stats.log', 'a') as f:
+            log_path = os.path.join(st.session_state.file_processor.temp_dir, 'processing_stats.log')
+            with open(log_path, 'a') as f:
                 f.write(log_entry)
         else:
             st.error(message)
@@ -74,3 +87,12 @@ if uploaded_file is not None:
 if st.button("Clean Up Temporary Files"):
     st.session_state.file_processor.cleanup()
     st.success("Temporary files cleaned up successfully!")
+
+# Add footer
+st.markdown("---")
+st.markdown("### About")
+st.markdown("""
+MusicSynth is a tool that converts sheet music into visual piano roll animations.
+- For local use: Supports both MusicXML files and sheet music images
+- For cloud use: Currently supports MusicXML files only
+""")
