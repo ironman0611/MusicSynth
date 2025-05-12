@@ -48,7 +48,6 @@ if uploaded_file is not None:
         
         if success:
             st.success(message)
-            st.info("Video generated successfully!")
             
             # Track video generation time
             video_start = time.time()
