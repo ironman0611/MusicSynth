@@ -8,7 +8,7 @@ import os
 import xml.etree.ElementTree as ET
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-from moviepy.editor import VideoClip, ImageClip, CompositeVideoClip
+from moviepy import *
 
 # Violin string notes (G3, D4, A4, E5)
 VIOLIN_STRINGS = ["G", "D", "A", "E"]
