@@ -2,3 +2,8 @@ numpy
 pillow
 moviepy
 streamlit
+oemer==0.1.5
+onnx
+onnxruntime
+tensorflow==2.15.0
+keras==2.10.0
