@@ -8,7 +8,15 @@ import os
 import xml.etree.ElementTree as ET
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-from moviepy import *
+from moviepy.editor import VideoClip, ImageClip, CompositeVideoClip, AudioFileClip, concatenate_videoclips
+import tempfile
+import subprocess
+import json
+import streamlit as st
+import time
+from datetime import datetime
+import shutil
+import uuid
 
 # Violin string notes (G3, D4, A4, E5)
 VIOLIN_STRINGS = ["G", "D", "A", "E"]
