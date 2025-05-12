@@ -255,7 +255,7 @@ def create_fingerboard_frame(notes, current_time, frame_size=(1280, 720)):
 
     draw.text((frame_size[0] // 2 - 150, 30), title, fill=(255, 255, 255), font=font)
     
-    return np.array(img)
+    return np.array(img, dtype=np.uint8)
 
 def make_video(notes, output_file="violin_tutorial.mp4", fps=30, duration=None):
     """Create a video tutorial of the notes to be played on the violin."""
