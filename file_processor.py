@@ -7,6 +7,7 @@ import streamlit as st
 from synthesia import parse_musicxml, make_video
 import shutil
 import uuid
+from moviepy.editor import VideoClip, ImageClip, CompositeVideoClip
 
 class FileProcessor:
     def __init__(self):
