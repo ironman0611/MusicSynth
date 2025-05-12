@@ -48,13 +48,29 @@ if uploaded_file is not None:
         
         if success:
             st.success(message)
-            st.info("Generating video visualization...")
+            st.info("Video generated successfully!")
             
             # Track video generation time
             video_start = time.time()
+            
+            # Try to display the video
+            try:
+                with open(output_path, 'rb') as video_file:
+                    video_bytes = video_file.read()
+                    st.video(video_bytes)
+            except Exception as e:
+                st.warning("Video preview is not available. You can download the video file instead.")
+            
+            # Add download button for the video
             with open(output_path, 'rb') as video_file:
                 video_bytes = video_file.read()
-                st.video(video_bytes)
+                st.download_button(
+                    label="Download Video",
+                    data=video_bytes,
+                    file_name=os.path.basename(output_path),
+                    mime="video/mp4"
+                )
+            
             timing_stats['steps']['video_generation'] = time.time() - video_start
             
             # Calculate total time
