@@ -1,0 +1,113 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  SAM application for MusicSynth, an AWS Lambda-powered service 
+  to convert MusicXML files into music visualization videos.
+
+Globals:
+  Function:
+    Timeout: 180 # seconds
+    MemorySize: 512 # MB
+    Runtime: python3.9
+    Handler: lambda_handler.handler # Assumes lambda_handler.py and its handler function
+
+Resources:
+  MusicSynthLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda_package/ # Relative path to the Lambda code package
+      Policies:
+        - AWSLambdaBasicExecutionRole # Grants permissions for CloudWatch logging
+      Environment:
+        Variables:
+          PYTHONUNBUFFERED: "1" # Ensures print statements are sent directly to CloudWatch Logs
+          PROCESSING_MODE: "LAMBDA" # Example custom environment variable
+          # Add any other necessary environment variables here (e.g., for Pillow, MoviePy if they need specific configs)
+          MPLCONFIGDIR: "/tmp/matplotlib" # Workaround for matplotlib in Lambda if it tries to write to home
+          # Note: Oemer (image processing) is disabled by default in file_processor.py when in Lambda env.
+          # Dependencies like ffmpeg for moviepy need to be available in the Lambda execution environment.
+          # This might require using a Lambda Layer or a custom container image if not provided by default.
+          # For this exercise, we assume a compatible Python environment with necessary shared libraries.
+      Events:
+        ProcessFileEvent:
+          Type: HttpApi
+          Properties:
+            Path: /processfile
+            Method: POST
+            ApiId: !Ref MusicSynthApi
+
+  MusicSynthApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Auth:
+        ApiKeyRequired: true # Enforces that an API key must be sent with requests
+        # Authorizer: NONE # Default, explicitly stated for clarity. We're not using a Lambda authorizer.
+      DefaultStageOptions: # These apply to the $default stage if StageName is not used, or the named stage.
+        ThrottlingBurstLimit: 10
+        ThrottlingRateLimit: 5
+      CorsConfiguration:
+        AllowOrigins:
+          - "*" # WARNING: For development only. Restrict this in production.
+        AllowHeaders:
+          - "Content-Type"
+          - "X-Amz-Date"
+          - "Authorization" # Typically for IAM or Cognito auth, but good to include
+          - "X-Api-Key"     # For API Key
+          - "X-Amz-Security-Token"
+        AllowMethods:
+          - "POST"
+          # OPTIONS is implicitly handled by HttpApi for CORS preflight if CorsConfiguration is set.
+          # Explicitly adding it can sometimes be necessary depending on client behavior or if more control is needed.
+          - "OPTIONS" 
+      StageName: prod # Explicitly create a 'prod' stage. This is referenced in Outputs.
+
+  # API Key Resource - This creates the key, but its value must be retrieved manually or via CLI.
+  MusicSynthApiKey:
+    Type: AWS::ApiGatewayV2::ApiKey # Using AWS::ApiGatewayV2::ApiKey as it's for HTTP API
+    Properties:
+      Name: MusicSynthClientApiKey
+      Enabled: true
+      # For HTTP APIs, the association of an API key to a usage plan is done via AWS::ApiGatewayV2::UsagePlanKey.
+      # However, HTTP APIs currently do not support Usage Plans directly in the same way as REST APIs.
+      # The ApiKeyRequired: true on the HttpApi resource itself is the primary mechanism for enforcement.
+      # The key is created, and clients must include it in the 'x-api-key' header.
+      # No StageKeys needed here for HTTP API key directly; it's not associated with stages like REST API keys.
+      # The key exists globally for the API once created.
+
+  # Usage Plan - For HTTP APIs, usage plans are configured differently than REST APIs.
+  # AWS::Serverless::HttpApi does not directly create usage plans or integrate them as smoothly as AWS::Serverless::Api.
+  # A full AWS::ApiGatewayV2::UsagePlan and AWS::ApiGatewayV2::UsagePlanKey would be needed for strict usage plan enforcement.
+  # For this template, we rely on ApiKeyRequired at the API level.
+  # If a Usage Plan is essential, you would define:
+  # 1. AWS::ApiGatewayV2::UsagePlan
+  # 2. AWS::ApiGatewayV2::UsagePlanKey (to associate MusicSynthApiKey with the UsagePlan and MusicSynthApi/prod stage)
+  # This adds complexity not typically covered by basic SAM templates for HTTP APIs.
+  # We will omit the UsagePlan for simplicity, focusing on API key requirement.
+
+Outputs:
+  MusicSynthApiEndpoint:
+    Description: "API Gateway endpoint URL for MusicSynth (invoke by appending /processfile)"
+    # Value: !Sub "https://${MusicSynthApi}.execute-api.${AWS::Region}.amazonaws.com" 
+    # The above is the base endpoint. The client will append /prod or the specific stage and path.
+    # For HTTP APIs, !GetAtt MusicSynthApi.ApiEndpoint provides the direct invoke URL for the $default stage.
+    # If using a named stage like 'prod', the format is https://{api-id}.execute-api.{region}.amazonaws.com/{stageName}
+    Value: !Sub "https://${MusicSynthApi}.execute-api.${AWS::Region}.amazonaws.com/${MusicSynthApi.StageName}"
+    # Note: MusicSynthApi.StageName refers to the StageName property we defined (prod).
+    # If you use !GetAtt MusicSynthApi.ApiEndpoint, it gives the URL for the $default stage.
+    # For a named stage, constructing the URL is often more reliable.
+
+  MusicSynthLambdaArn:
+    Description: "ARN of the MusicSynth Lambda function"
+    Value: !GetAtt MusicSynthLambda.Arn
+
+  MusicSynthApiKeyId: # Changed from MusicSynthApiKeyOut to be more specific about what's outputted
+    Description: >
+      ID of the generated API Key for MusicSynth API. 
+      The actual API Key VALUE must be retrieved manually from the AWS API Gateway console 
+      or via AWS CLI (e.g., aws apigateway get-api-key --api-key <this-id> --include-value).
+      Handle the key value with care.
+    Value: !Ref MusicSynthApiKey
+    # Note on API Key Value: CloudFormation/SAM does not directly output the secret value of an API Key.
+    # This output provides the Key ID. The value is needed by clients in the 'x-api-key' header.
+    # For automated setups, consider AWS Secrets Manager or Parameter Store with custom resources.
+```
