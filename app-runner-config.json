@@ -1,0 +1,29 @@
+{
+    "ServiceArn": "arn:aws:apprunner:us-east-2:302571459137:service/music-synth-app",
+    "SourceConfiguration": {
+        "ImageRepository": {
+            "ImageIdentifier": "302571459137.dkr.ecr.us-east-2.amazonaws.com/music-synth:latest",
+            "ImageConfiguration": {
+                "Port": "8501"
+            },
+            "ImageRepositoryType": "ECR"
+        },
+        "AutoDeploymentsEnabled": false,
+        "AuthenticationConfiguration": {
+            "AccessRoleArn": "arn:aws:iam::302571459137:role/AppRunnerECRAccessRole"
+        }
+    },
+    "InstanceConfiguration": {
+        "Cpu": "1 vCPU",
+        "Memory": "2 GB"
+    },
+    "HealthCheckConfiguration": {
+        "Path": "/",
+        "Protocol": "HTTP",
+        "Interval": 10,
+        "Timeout": 5,
+        "HealthyThreshold": 1,
+        "UnhealthyThreshold": 5
+    },
+    "AutoScalingConfigurationArn": "arn:aws:apprunner:us-east-2:302571459137:autoscalingconfiguration/DefaultConfiguration/1/00000000000000000000000000000001"
+} 
