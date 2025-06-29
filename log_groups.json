@@ -1,0 +1,13 @@
+{
+    "logGroups": [
+        {
+            "logGroupName": "/ecs/music-synth",
+            "creationTime": 1748360301803,
+            "metricFilterCount": 0,
+            "arn": "arn:aws:logs:us-east-2:302571459137:log-group:/ecs/music-synth:*",
+            "storedBytes": 0,
+            "logGroupClass": "STANDARD",
+            "logGroupArn": "arn:aws:logs:us-east-2:302571459137:log-group:/ecs/music-synth"
+        }
+    ]
+}

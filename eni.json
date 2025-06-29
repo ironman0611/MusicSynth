@@ -1,0 +1,62 @@
+{
+    "NetworkInterfaces": [
+        {
+            "Association": {
+                "IpOwnerId": "amazon",
+                "PublicDnsName": "ec2-18-117-77-18.us-east-2.compute.amazonaws.com",
+                "PublicIp": "18.117.77.18"
+            },
+            "Attachment": {
+                "AttachTime": "2025-05-27T16:25:25+00:00",
+                "AttachmentId": "eni-attach-0bdde90038beeb940",
+                "DeleteOnTermination": false,
+                "DeviceIndex": 1,
+                "NetworkCardIndex": 0,
+                "InstanceOwnerId": "237126088505",
+                "Status": "attached"
+            },
+            "AvailabilityZone": "us-east-2a",
+            "Description": "arn:aws:ecs:us-east-2:302571459137:attachment/bdf2aec3-eb98-4e66-9cfe-d0832884b0cd",
+            "Groups": [
+                {
+                    "GroupId": "sg-026b19b9a6b78f0a1",
+                    "GroupName": "music-synth-sg"
+                }
+            ],
+            "InterfaceType": "interface",
+            "Ipv6Addresses": [],
+            "MacAddress": "02:da:4e:f8:27:69",
+            "NetworkInterfaceId": "eni-06edf713546ab9996",
+            "OwnerId": "302571459137",
+            "PrivateDnsName": "ip-172-31-14-179.us-east-2.compute.internal",
+            "PublicDnsName": "ec2-18-117-77-18.us-east-2.compute.amazonaws.com",
+            "PublicIpDnsNameOptions": {
+                "DnsHostnameType": "public-ipv4-dns-name",
+                "PublicIpv4DnsName": "ec2-18-117-77-18.us-east-2.compute.amazonaws.com"
+            },
+            "PrivateIpAddress": "172.31.14.179",
+            "PrivateIpAddresses": [
+                {
+                    "Association": {
+                        "IpOwnerId": "amazon",
+                        "PublicDnsName": "ec2-18-117-77-18.us-east-2.compute.amazonaws.com",
+                        "PublicIp": "18.117.77.18"
+                    },
+                    "Primary": true,
+                    "PrivateDnsName": "ip-172-31-14-179.us-east-2.compute.internal",
+                    "PrivateIpAddress": "172.31.14.179"
+                }
+            ],
+            "RequesterId": "975259786086",
+            "RequesterManaged": true,
+            "SourceDestCheck": true,
+            "Status": "in-use",
+            "SubnetId": "subnet-0f6b8fef671b7d9c9",
+            "TagSet": [],
+            "VpcId": "vpc-0e3cef6b1f986f9ba",
+            "Operator": {
+                "Managed": false
+            }
+        }
+    ]
+}

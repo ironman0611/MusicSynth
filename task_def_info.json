@@ -1,0 +1,120 @@
+{
+    "taskDefinition": {
+        "taskDefinitionArn": "arn:aws:ecs:us-east-2:302571459137:task-definition/music-synth:1",
+        "containerDefinitions": [
+            {
+                "name": "music-synth",
+                "image": "302571459137.dkr.ecr.us-east-2.amazonaws.com/musicsynth:latest",
+                "cpu": 0,
+                "portMappings": [
+                    {
+                        "containerPort": 8501,
+                        "hostPort": 8501,
+                        "protocol": "tcp"
+                    }
+                ],
+                "essential": true,
+                "environment": [
+                    {
+                        "name": "STREAMLIT_BROWSER_GATHER_USAGE_STATS",
+                        "value": "false"
+                    },
+                    {
+                        "name": "PYTHONUNBUFFERED",
+                        "value": "1"
+                    },
+                    {
+                        "name": "STREAMLIT_SERVER_ADDRESS",
+                        "value": "0.0.0.0"
+                    },
+                    {
+                        "name": "STREAMLIT_LOG_LEVEL",
+                        "value": "debug"
+                    },
+                    {
+                        "name": "STREAMLIT_SERVER_PORT",
+                        "value": "8501"
+                    },
+                    {
+                        "name": "STREAMLIT_SERVER_HEADLESS",
+                        "value": "true"
+                    }
+                ],
+                "mountPoints": [],
+                "volumesFrom": [],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {
+                        "awslogs-group": "/ecs/music-synth",
+                        "awslogs-create-group": "true",
+                        "awslogs-region": "us-east-2",
+                        "awslogs-stream-prefix": "ecs"
+                    }
+                },
+                "healthCheck": {
+                    "command": [
+                        "CMD-SHELL",
+                        "curl -f http://localhost:8501/_stcore/health || exit 1"
+                    ],
+                    "interval": 30,
+                    "timeout": 30,
+                    "retries": 3,
+                    "startPeriod": 120
+                },
+                "systemControls": []
+            }
+        ],
+        "family": "music-synth",
+        "taskRoleArn": "arn:aws:iam::302571459137:role/ecsTaskRole",
+        "executionRoleArn": "arn:aws:iam::302571459137:role/ecsTaskExecutionRole",
+        "networkMode": "awsvpc",
+        "revision": 1,
+        "volumes": [],
+        "status": "ACTIVE",
+        "requiresAttributes": [
+            {
+                "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+            },
+            {
+                "name": "ecs.capability.execution-role-awslogs"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.ecr-auth"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.task-iam-role"
+            },
+            {
+                "name": "ecs.capability.container-health-check"
+            },
+            {
+                "name": "ecs.capability.execution-role-ecr-pull"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+            },
+            {
+                "name": "ecs.capability.task-eni"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+            }
+        ],
+        "placementConstraints": [],
+        "compatibilities": [
+            "EC2",
+            "FARGATE"
+        ],
+        "requiresCompatibilities": [
+            "FARGATE"
+        ],
+        "cpu": "1024",
+        "memory": "2048",
+        "registeredAt": "2025-05-27T10:22:31.022000-05:00",
+        "registeredBy": "arn:aws:iam::302571459137:user/akaushik"
+    },
+    "tags": []
+}

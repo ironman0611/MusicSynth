@@ -1,0 +1,12 @@
+[
+    {
+        "id": "0a62c907-b953-4f59-bc55-ec5a650ab88e",
+        "createdAt": "2025-05-27T10:26:17.284000-05:00",
+        "message": "(service music-synth-service) has started 1 tasks: (task 7b749f972df74c56a8091c20e6e7489e)."
+    },
+    {
+        "id": "e4b40139-3c52-4294-a47e-09b95c94841a",
+        "createdAt": "2025-05-27T10:25:17.921000-05:00",
+        "message": "(service music-synth-service) has started 1 tasks: (task d1b025c8b7dd4783b5249030541aa276)."
+    }
+]

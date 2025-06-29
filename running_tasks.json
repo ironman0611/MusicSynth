@@ -1,0 +1,5 @@
+{
+    "taskArns": [
+        "arn:aws:ecs:us-east-2:302571459137:task/music-synth-cluster/4c9683c5733e4fcfb535348115ae9637"
+    ]
+}

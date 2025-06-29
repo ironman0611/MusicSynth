@@ -1,0 +1,80 @@
+{
+    "service": {
+        "serviceArn": "arn:aws:ecs:us-east-2:302571459137:service/music-synth-cluster/music-synth-service",
+        "serviceName": "music-synth-service",
+        "clusterArn": "arn:aws:ecs:us-east-2:302571459137:cluster/music-synth-cluster",
+        "loadBalancers": [],
+        "serviceRegistries": [],
+        "status": "ACTIVE",
+        "desiredCount": 1,
+        "runningCount": 0,
+        "pendingCount": 0,
+        "launchType": "FARGATE",
+        "platformVersion": "LATEST",
+        "platformFamily": "Linux",
+        "taskDefinition": "arn:aws:ecs:us-east-2:302571459137:task-definition/music-synth:1",
+        "deploymentConfiguration": {
+            "deploymentCircuitBreaker": {
+                "enable": false,
+                "rollback": false
+            },
+            "maximumPercent": 200,
+            "minimumHealthyPercent": 100
+        },
+        "deployments": [
+            {
+                "id": "ecs-svc/3020199057757746087",
+                "status": "PRIMARY",
+                "taskDefinition": "arn:aws:ecs:us-east-2:302571459137:task-definition/music-synth:1",
+                "desiredCount": 0,
+                "pendingCount": 0,
+                "runningCount": 0,
+                "failedTasks": 0,
+                "createdAt": "2025-05-27T10:24:58.908000-05:00",
+                "updatedAt": "2025-05-27T10:24:58.908000-05:00",
+                "launchType": "FARGATE",
+                "platformVersion": "1.4.0",
+                "platformFamily": "Linux",
+                "networkConfiguration": {
+                    "awsvpcConfiguration": {
+                        "subnets": [
+                            "subnet-0f6b8fef671b7d9c9"
+                        ],
+                        "securityGroups": [
+                            "sg-026b19b9a6b78f0a1"
+                        ],
+                        "assignPublicIp": "ENABLED"
+                    }
+                },
+                "rolloutState": "IN_PROGRESS",
+                "rolloutStateReason": "ECS deployment ecs-svc/3020199057757746087 in progress."
+            }
+        ],
+        "roleArn": "arn:aws:iam::302571459137:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+        "events": [],
+        "createdAt": "2025-05-27T10:24:58.908000-05:00",
+        "placementConstraints": [],
+        "placementStrategy": [],
+        "networkConfiguration": {
+            "awsvpcConfiguration": {
+                "subnets": [
+                    "subnet-0f6b8fef671b7d9c9"
+                ],
+                "securityGroups": [
+                    "sg-026b19b9a6b78f0a1"
+                ],
+                "assignPublicIp": "ENABLED"
+            }
+        },
+        "healthCheckGracePeriodSeconds": 0,
+        "schedulingStrategy": "REPLICA",
+        "deploymentController": {
+            "type": "ECS"
+        },
+        "createdBy": "arn:aws:iam::302571459137:user/akaushik",
+        "enableECSManagedTags": false,
+        "propagateTags": "NONE",
+        "enableExecuteCommand": false,
+        "availabilityZoneRebalancing": "DISABLED"
+    }
+}

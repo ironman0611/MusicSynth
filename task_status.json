@@ -1,0 +1,99 @@
+{
+    "tasks": [
+        {
+            "attachments": [
+                {
+                    "id": "bdf2aec3-eb98-4e66-9cfe-d0832884b0cd",
+                    "type": "ElasticNetworkInterface",
+                    "status": "ATTACHED",
+                    "details": [
+                        {
+                            "name": "subnetId",
+                            "value": "subnet-0f6b8fef671b7d9c9"
+                        },
+                        {
+                            "name": "networkInterfaceId",
+                            "value": "eni-06edf713546ab9996"
+                        },
+                        {
+                            "name": "macAddress",
+                            "value": "02:da:4e:f8:27:69"
+                        },
+                        {
+                            "name": "privateDnsName",
+                            "value": "ip-172-31-14-179.us-east-2.compute.internal"
+                        },
+                        {
+                            "name": "privateIPv4Address",
+                            "value": "172.31.14.179"
+                        }
+                    ]
+                }
+            ],
+            "attributes": [
+                {
+                    "name": "ecs.cpu-architecture",
+                    "value": "x86_64"
+                }
+            ],
+            "availabilityZone": "us-east-2a",
+            "clusterArn": "arn:aws:ecs:us-east-2:302571459137:cluster/music-synth-cluster",
+            "connectivity": "CONNECTED",
+            "connectivityAt": "2025-05-27T11:25:24.232000-05:00",
+            "containers": [
+                {
+                    "containerArn": "arn:aws:ecs:us-east-2:302571459137:container/music-synth-cluster/4c9683c5733e4fcfb535348115ae9637/8b572acf-ff59-4f0b-8277-596714851c36",
+                    "taskArn": "arn:aws:ecs:us-east-2:302571459137:task/music-synth-cluster/4c9683c5733e4fcfb535348115ae9637",
+                    "name": "music-synth",
+                    "image": "302571459137.dkr.ecr.us-east-2.amazonaws.com/musicsynth:latest",
+                    "imageDigest": "sha256:6f81218796c84b70e2a1225faeac462f7a8af5b552bfd4b08a2c3d8bf4fc0a12",
+                    "runtimeId": "4c9683c5733e4fcfb535348115ae9637-1247896467",
+                    "lastStatus": "RUNNING",
+                    "networkBindings": [],
+                    "networkInterfaces": [
+                        {
+                            "attachmentId": "bdf2aec3-eb98-4e66-9cfe-d0832884b0cd",
+                            "privateIpv4Address": "172.31.14.179"
+                        }
+                    ],
+                    "healthStatus": "HEALTHY",
+                    "cpu": "0"
+                }
+            ],
+            "cpu": "1024",
+            "createdAt": "2025-05-27T11:25:20.766000-05:00",
+            "desiredStatus": "RUNNING",
+            "enableExecuteCommand": false,
+            "group": "service:music-synth-service",
+            "healthStatus": "HEALTHY",
+            "lastStatus": "RUNNING",
+            "launchType": "FARGATE",
+            "memory": "2048",
+            "overrides": {
+                "containerOverrides": [
+                    {
+                        "name": "music-synth"
+                    }
+                ],
+                "inferenceAcceleratorOverrides": []
+            },
+            "platformVersion": "1.4.0",
+            "platformFamily": "Linux",
+            "pullStartedAt": "2025-05-27T11:25:32.298000-05:00",
+            "pullStoppedAt": "2025-05-27T11:26:30.867000-05:00",
+            "startedAt": "2025-05-27T11:26:30.947000-05:00",
+            "startedBy": "ecs-svc/7518596053751675368",
+            "tags": [],
+            "taskArn": "arn:aws:ecs:us-east-2:302571459137:task/music-synth-cluster/4c9683c5733e4fcfb535348115ae9637",
+            "taskDefinitionArn": "arn:aws:ecs:us-east-2:302571459137:task-definition/music-synth:2",
+            "version": 4,
+            "ephemeralStorage": {
+                "sizeInGiB": 20
+            },
+            "fargateEphemeralStorage": {
+                "sizeInGiB": 20
+            }
+        }
+    ],
+    "failures": []
+}

@@ -1,0 +1,244 @@
+{
+    "services": [
+        {
+            "serviceArn": "arn:aws:ecs:us-east-2:302571459137:service/music-synth-cluster/music-synth-service",
+            "serviceName": "music-synth-service",
+            "clusterArn": "arn:aws:ecs:us-east-2:302571459137:cluster/music-synth-cluster",
+            "loadBalancers": [],
+            "serviceRegistries": [],
+            "status": "ACTIVE",
+            "desiredCount": 1,
+            "runningCount": 1,
+            "pendingCount": 0,
+            "launchType": "FARGATE",
+            "platformVersion": "LATEST",
+            "platformFamily": "Linux",
+            "taskDefinition": "arn:aws:ecs:us-east-2:302571459137:task-definition/music-synth:2",
+            "deploymentConfiguration": {
+                "deploymentCircuitBreaker": {
+                    "enable": false,
+                    "rollback": false
+                },
+                "maximumPercent": 200,
+                "minimumHealthyPercent": 100
+            },
+            "deployments": [
+                {
+                    "id": "ecs-svc/7518596053751675368",
+                    "status": "PRIMARY",
+                    "taskDefinition": "arn:aws:ecs:us-east-2:302571459137:task-definition/music-synth:2",
+                    "desiredCount": 1,
+                    "pendingCount": 0,
+                    "runningCount": 1,
+                    "failedTasks": 0,
+                    "createdAt": "2025-05-27T11:24:59.780000-05:00",
+                    "updatedAt": "2025-05-27T11:29:08.787000-05:00",
+                    "launchType": "FARGATE",
+                    "platformVersion": "1.4.0",
+                    "platformFamily": "Linux",
+                    "networkConfiguration": {
+                        "awsvpcConfiguration": {
+                            "subnets": [
+                                "subnet-0f6b8fef671b7d9c9"
+                            ],
+                            "securityGroups": [
+                                "sg-026b19b9a6b78f0a1"
+                            ],
+                            "assignPublicIp": "ENABLED"
+                        }
+                    },
+                    "rolloutState": "COMPLETED",
+                    "rolloutStateReason": "ECS deployment ecs-svc/7518596053751675368 completed."
+                }
+            ],
+            "roleArn": "arn:aws:iam::302571459137:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+            "events": [
+                {
+                    "id": "de7e6920-a1ec-4811-a41e-0468f04b7b60",
+                    "createdAt": "2025-05-27T11:29:08.794000-05:00",
+                    "message": "(service music-synth-service) has reached a steady state."
+                },
+                {
+                    "id": "5863ca0a-62da-4daf-a44d-7d359147b1d9",
+                    "createdAt": "2025-05-27T11:29:08.793000-05:00",
+                    "message": "(service music-synth-service) (deployment ecs-svc/7518596053751675368) deployment completed."
+                },
+                {
+                    "id": "dc078b19-4341-4f86-94e2-706cd4ec97bf",
+                    "createdAt": "2025-05-27T11:27:13.226000-05:00",
+                    "message": "(service music-synth-service) has stopped 1 running tasks: (task d00199c5bd5444978f1a7d5fee1832ef)."
+                },
+                {
+                    "id": "34af30db-579a-48da-8ce6-aff0f5f990d0",
+                    "createdAt": "2025-05-27T11:25:20.828000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 4c9683c5733e4fcfb535348115ae9637)."
+                },
+                {
+                    "id": "e12dceec-b97f-4fa3-9e60-9885740d19c3",
+                    "createdAt": "2025-05-27T11:13:53.955000-05:00",
+                    "message": "(service music-synth-service) has reached a steady state."
+                },
+                {
+                    "id": "bb33769e-98ad-49d9-a1e2-0370c5bca1f2",
+                    "createdAt": "2025-05-27T11:13:53.953000-05:00",
+                    "message": "(service music-synth-service) (deployment ecs-svc/4171340343301703391) deployment completed."
+                },
+                {
+                    "id": "4e6e408f-26e2-41ed-bade-4ccf5152ee86",
+                    "createdAt": "2025-05-27T11:11:59.753000-05:00",
+                    "message": "(service music-synth-service) has stopped 1 running tasks: (task 32e522e5be9043c8baa49a66f6e18d00)."
+                },
+                {
+                    "id": "b96f3222-674e-4fb8-8054-7e0b6b0f233a",
+                    "createdAt": "2025-05-27T11:10:07.189000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task d00199c5bd5444978f1a7d5fee1832ef)."
+                },
+                {
+                    "id": "172b1726-0692-45e9-83e7-e3bc3b56f359",
+                    "createdAt": "2025-05-27T11:02:55.440000-05:00",
+                    "message": "(service music-synth-service) has reached a steady state."
+                },
+                {
+                    "id": "2c775ea0-f9cc-47cb-a0b4-aa610a2594dc",
+                    "createdAt": "2025-05-27T11:02:55.439000-05:00",
+                    "message": "(service music-synth-service) (deployment ecs-svc/6003717876216242563) deployment completed."
+                },
+                {
+                    "id": "5762f2b2-34ce-47be-b434-54d76295ce8e",
+                    "createdAt": "2025-05-27T11:01:43.701000-05:00",
+                    "message": "(service music-synth-service) has stopped 1 running tasks: (task e598ae32475a444e9a42f8bdbb42aba8)."
+                },
+                {
+                    "id": "a7528063-d8bd-47ff-92b0-b2fccbc1e15b",
+                    "createdAt": "2025-05-27T10:59:41.164000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 32e522e5be9043c8baa49a66f6e18d00)."
+                },
+                {
+                    "id": "99363f93-0ab7-499d-9884-c173f880838c",
+                    "createdAt": "2025-05-27T10:57:55.376000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task e598ae32475a444e9a42f8bdbb42aba8)."
+                },
+                {
+                    "id": "98e2af04-b380-4f17-ba67-81a26cd3853a",
+                    "createdAt": "2025-05-27T10:55:59.229000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 59f0b255a95847f9b3e5d5319c98fa59)."
+                },
+                {
+                    "id": "131ca1d1-b53a-40f3-89d8-3fe98b2f52f1",
+                    "createdAt": "2025-05-27T10:54:02.398000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 45c2d940f2074a91b18f23483430fe2b)."
+                },
+                {
+                    "id": "8e3d9328-d400-45bc-ae90-fc7c62dbf891",
+                    "createdAt": "2025-05-27T10:51:06.304000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 4805b01846814078a337369afe535923)."
+                },
+                {
+                    "id": "d68e6ec8-a2b9-40d6-8f2b-c98180b77a75",
+                    "createdAt": "2025-05-27T10:47:11.826000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task a925c46a0e534a739b3ed064cf64a74a)."
+                },
+                {
+                    "id": "17280db2-98e5-47fd-b590-42a6b0dbaef2",
+                    "createdAt": "2025-05-27T10:42:00.920000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 526066035f4742f7bfe7c83c9b490c56)."
+                },
+                {
+                    "id": "464e4f16-d47d-4a39-b072-2cffb4ede4d9",
+                    "createdAt": "2025-05-27T10:40:04.058000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 6c2c4ebfffa44191826cc8bde017015c)."
+                },
+                {
+                    "id": "c8cfaaa5-ab38-423c-b761-fb9af06b0c3f",
+                    "createdAt": "2025-05-27T10:38:07.738000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 8537cd9f83324ce7a154d43d828ed5a6)."
+                },
+                {
+                    "id": "905b61b4-f34b-478c-ba23-b397dd96ac13",
+                    "createdAt": "2025-05-27T10:36:41.236000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 2a478adf0b9f44f3b3114d6ad0f3fbea)."
+                },
+                {
+                    "id": "0fee2ae0-8c0a-4b72-b16f-5f719b07c8e6",
+                    "createdAt": "2025-05-27T10:35:43.211000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 14cced6b1ba14399bc87b90f9b83c9ea)."
+                },
+                {
+                    "id": "980bd38f-2d8d-471c-b658-af2e1b9060d4",
+                    "createdAt": "2025-05-27T10:34:42.658000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task bfe44481502c4b229b376d313c4ce277)."
+                },
+                {
+                    "id": "7a9c1cd3-424a-4933-8f40-c9df0e81f2a1",
+                    "createdAt": "2025-05-27T10:33:37.066000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 6c689c77c7b745b7b66dfe13bcdb459a)."
+                },
+                {
+                    "id": "4c6c82e3-bc49-400f-86ad-4b9b816b6677",
+                    "createdAt": "2025-05-27T10:32:36.441000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 785c03d8731d49f2823ea94b52659443)."
+                },
+                {
+                    "id": "1015e4f3-4d1d-413e-96c8-114fd0465644",
+                    "createdAt": "2025-05-27T10:31:17.159000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 5444d9e88ec648ea9de0073a862a8394)."
+                },
+                {
+                    "id": "96f5355a-ccc3-4614-9f43-4b9dc8e75001",
+                    "createdAt": "2025-05-27T10:30:14.818000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 5a1771deef3b495893001af551379d0c)."
+                },
+                {
+                    "id": "adcbb186-f65e-4ffd-9b53-0e37bf4ee5a6",
+                    "createdAt": "2025-05-27T10:29:13.859000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task e2f8d70570174ca5bd34e81f6f764569)."
+                },
+                {
+                    "id": "33fbeb2f-30d0-40e0-96ac-1eccfc859ff3",
+                    "createdAt": "2025-05-27T10:28:15.977000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task fbd17782acae4213a58c8efb61d5c0f2)."
+                },
+                {
+                    "id": "dd3347e2-7b71-4fbe-8f49-ce7e83ae91bf",
+                    "createdAt": "2025-05-27T10:27:17.368000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task f1dbc8608a3649abaf9e5cd0bb5c926c)."
+                },
+                {
+                    "id": "0a62c907-b953-4f59-bc55-ec5a650ab88e",
+                    "createdAt": "2025-05-27T10:26:17.284000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task 7b749f972df74c56a8091c20e6e7489e)."
+                },
+                {
+                    "id": "e4b40139-3c52-4294-a47e-09b95c94841a",
+                    "createdAt": "2025-05-27T10:25:17.921000-05:00",
+                    "message": "(service music-synth-service) has started 1 tasks: (task d1b025c8b7dd4783b5249030541aa276)."
+                }
+            ],
+            "createdAt": "2025-05-27T10:24:58.908000-05:00",
+            "placementConstraints": [],
+            "placementStrategy": [],
+            "networkConfiguration": {
+                "awsvpcConfiguration": {
+                    "subnets": [
+                        "subnet-0f6b8fef671b7d9c9"
+                    ],
+                    "securityGroups": [
+                        "sg-026b19b9a6b78f0a1"
+                    ],
+                    "assignPublicIp": "ENABLED"
+                }
+            },
+            "healthCheckGracePeriodSeconds": 120,
+            "schedulingStrategy": "REPLICA",
+            "deploymentController": {
+                "type": "ECS"
+            },
+            "createdBy": "arn:aws:iam::302571459137:user/akaushik",
+            "enableECSManagedTags": false,
+            "propagateTags": "NONE",
+            "enableExecuteCommand": false,
+            "availabilityZoneRebalancing": "DISABLED"
+        }
+    ],
+    "failures": []
+}

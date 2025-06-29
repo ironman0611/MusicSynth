@@ -1,0 +1,12 @@
+{
+    "registryId": "302571459137",
+    "repositoryName": "musicsynth",
+    "imageDigest": "sha256:de14c686234333fc92988d5b87d9191e10e6d954d5f9e807bafb0aaa3d96add6",
+    "imageTags": [
+        "latest"
+    ],
+    "imageSizeInBytes": 1152968131,
+    "imagePushedAt": "2025-05-27T10:33:59.624000-05:00",
+    "imageManifestMediaType": "application/vnd.oci.image.index.v1+json",
+    "lastRecordedPullTime": "2025-05-27T10:34:56.520000-05:00"
+}

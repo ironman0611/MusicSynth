@@ -2,7 +2,7 @@
     "ServiceArn": "arn:aws:apprunner:us-east-2:302571459137:service/music-synth-app",
     "SourceConfiguration": {
         "ImageRepository": {
-            "ImageIdentifier": "302571459137.dkr.ecr.us-east-2.amazonaws.com/music-synth:latest",
+            "ImageIdentifier": "302571459137.dkr.ecr.us-east-2.amazonaws.com/musicsynth:latest",
             "ImageConfiguration": {
                 "Port": "8501"
             },
@@ -20,9 +20,9 @@
     "HealthCheckConfiguration": {
         "Path": "/",
         "Protocol": "HTTP",
-        "Interval": 10,
-        "Timeout": 5,
-        "HealthyThreshold": 1,
+        "Interval": 20,
+        "Timeout": 10,
+        "HealthyThreshold": 2,
         "UnhealthyThreshold": 5
     },
     "AutoScalingConfigurationArn": "arn:aws:apprunner:us-east-2:302571459137:autoscalingconfiguration/DefaultConfiguration/1/00000000000000000000000000000001"

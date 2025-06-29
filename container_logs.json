@@ -1,0 +1,431 @@
+{
+    "events": [
+        {
+            "timestamp": 1748363190963,
+            "message": "[2025-05-27 16:26:30] === Starting Streamlit application ===",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190969,
+            "message": "[2025-05-27 16:26:30] Current directory: /app",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190970,
+            "message": "[2025-05-27 16:26:30] Directory contents:",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190978,
+            "message": "total 56",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190978,
+            "message": "drwxr-xr-x 1 root root  4096 May 27 16:24 .",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190978,
+            "message": "drwxr-xr-x 1 root root  4096 May 27 16:26 ..",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190978,
+            "message": "-rw-r--r-- 1 root root  5483 May 27 16:20 app.py",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190978,
+            "message": "-rw-r--r-- 1 root root  8547 May 12 22:00 file_processor.py",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190978,
+            "message": "-rw-r--r-- 1 root root   642 May 26 03:01 sheet_to_xml.py",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190978,
+            "message": "-rwxr-xr-x 1 root root  2170 May 27 16:20 start.sh",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190978,
+            "message": "-rw-r--r-- 1 root root 11776 May 26 03:01 synthesia.py",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190978,
+            "message": "drwxr-xr-x 2 root root  4096 May 27 16:24 temp",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190978,
+            "message": "drwxr-xr-x 2 root root  4096 May 27 16:24 xml_files",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190987,
+            "message": "[2025-05-27 16:26:30] Environment variables:",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "PYTHON_SHA256=849da87af4df137710c1796e276a955f7a85c9f971081067c8f565d15c352a09",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "PYTHONUNBUFFERED=1",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "AWS_EXECUTION_ENV=AWS_ECS_FARGATE",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI=/v2/credentials/1deca27e-afa9-4fbf-8af0-d5be46b552a4",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "HOSTNAME=ip-172-31-14-179.us-east-2.compute.internal",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "PYTHON_VERSION=3.11.12",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "AWS_DEFAULT_REGION=us-east-2",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_SERVER_ADDRESS=0.0.0.0",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_SERVER_ENABLE_STATIC_SERVING=true",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "AWS_REGION=us-east-2",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "PWD=/app",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "ECS_CONTAINER_METADATA_URI_V4=http://169.254.170.2/v4/4c9683c5733e4fcfb535348115ae9637-1247896467",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_SERVER_HEADLESS=true",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "HOME=/root",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "LANG=C.UTF-8",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_SERVER_MAX_MESSAGE_SIZE=200",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=false",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_SERVER_SHOW_ERROR_DETAILS=true",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "ECS_AGENT_URI=http://169.254.170.2/api/4c9683c5733e4fcfb535348115ae9637-1247896467",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_SERVER_PORT=8501",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_SERVER_ENABLE_CORS=false",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "PYTHONIOENCODING=utf-8",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "ECS_CONTAINER_METADATA_URI=http://169.254.170.2/v3/4c9683c5733e4fcfb535348115ae9637-1247896467",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "SHLVL=1",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_SERVER_ENABLE_WEBSOCKET_COMPRESSION=false",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_SERVER_MAX_UPLOAD_SIZE=200",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_BROWSER_GATHER_USAGE_STATS=false",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "STREAMLIT_LOG_LEVEL=debug",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190989,
+            "message": "_=/usr/bin/env",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363190990,
+            "message": "[2025-05-27 16:26:30] Python version:",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191023,
+            "message": "Python 3.11.12",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191024,
+            "message": "[2025-05-27 16:26:31] Checking if required files exist:",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191026,
+            "message": "-rw-r--r-- 1 root root  5483 May 27 16:20 app.py",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191026,
+            "message": "-rw-r--r-- 1 root root  8547 May 12 22:00 file_processor.py",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191026,
+            "message": "-rw-r--r-- 1 root root   642 May 26 03:01 sheet_to_xml.py",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191026,
+            "message": "-rw-r--r-- 1 root root 11776 May 26 03:01 synthesia.py",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191027,
+            "message": "[2025-05-27 16:26:31] Checking Python path:",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191050,
+            "message": "/usr/local/lib/python311.zip",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191050,
+            "message": "/usr/local/lib/python3.11",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191050,
+            "message": "/usr/local/lib/python3.11/lib-dynload",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191050,
+            "message": "/usr/local/lib/python3.11/site-packages",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363191055,
+            "message": "[2025-05-27 16:26:31] Checking if Streamlit is installed:",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192022,
+            "message": "Streamlit version: 1.45.1",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192078,
+            "message": "[2025-05-27 16:26:32] Starting Streamlit with explicit command...",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192080,
+            "message": "[2025-05-27 16:26:32] Command: python -m streamlit run app.py --server.port=8501 --server.address=0.0.0.0 --logger.level=debug",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192082,
+            "message": "[2025-05-27 16:26:32] Streamlit started with PID: 33",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192083,
+            "message": "[2025-05-27 16:26:32] Waiting for Streamlit to start...",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192085,
+            "message": "[2025-05-27 16:26:32] Attempt 1: Checking if Streamlit is running...",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192116,
+            "message": "[2025-05-27 16:26:32] Streamlit not ready yet, waiting...",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192503,
+            "message": "2025-05-27 16:26:32.503 WARNING streamlit.web.cli: Setting the log level using the --log_level flag is unsupported.",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192503,
+            "message": "Use the --logger.level flag (after your streamlit command) instead.",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192508,
+            "message": "2025-05-27 16:26:32.508 Starting server...",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192508,
+            "message": "2025-05-27 16:26:32.508 Serving static content from /usr/local/lib/python3.11/site-packages/streamlit/static",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192511,
+            "message": "2025-05-27 16:26:32.510 Server started on port 8501",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192511,
+            "message": "2025-05-27 16:26:32.511 Runtime state: RuntimeState.INITIAL -> RuntimeState.NO_SESSIONS_CONNECTED",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192604,
+            "message": "WARNING: Static file serving is enabled, but no static folder found at /app/static. To disable static file serving, set server.enableStaticServing to false.",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192605,
+            "message": "2025-05-27 16:26:32.605 Setting up signal handler",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192605,
+            "message": "  You can now view your Streamlit app in your browser.",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363192605,
+            "message": "  URL: http://0.0.0.0:8501",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363194120,
+            "message": "[2025-05-27 16:26:34] Attempt 2: Checking if Streamlit is running...",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363194131,
+            "message": "[2025-05-27 16:26:34] Streamlit health check passed!",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363194132,
+            "message": "[2025-05-27 16:26:34] Checking if port 8501 is listening:",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363194136,
+            "message": "tcp        0      0 0.0.0.0:8501            0.0.0.0:*               LISTEN      33/python           ",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363194138,
+            "message": "[2025-05-27 16:26:34] Checking Streamlit process status:",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363194156,
+            "message": "root        33 21.6  1.2  55632 48420 ?        S    16:26   0:00 python -m streamlit run app.py --server.port=8501 --server.address=0.0.0.0 --logger.level=debug",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363194156,
+            "message": "root        49  0.0  0.0   3748  1896 ?        S    16:26   0:00 grep streamlit",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363194160,
+            "message": "[2025-05-27 16:26:34] Checking Streamlit logs:",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363194162,
+            "message": "No Streamlit log file found",
+            "ingestionTime": 1748363195922
+        },
+        {
+            "timestamp": 1748363194163,
+            "message": "[2025-05-27 16:26:34] === Startup complete ===",
+            "ingestionTime": 1748363195922
+        }
+    ],
+    "nextForwardToken": "f/38989802107518185852019835445936265190926383747417505876/s",
+    "nextBackwardToken": "b/38989802036155801216721841393021966718451626928280174592/s"
+}

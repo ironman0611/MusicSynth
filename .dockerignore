@@ -1,0 +1,42 @@
+# Version control
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Temporary files
+temp/
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# Test files
+*.xml
+*.jpg
+*.jpeg
+*.png
+*.musicxml
+colab.ipynb
+
+# Documentation
+*.md
+LICENSE
+sequence_diagram.md
+
+# AWS config files
+app-runner-config.json
+ecr-policy.json
+trust-policy.json
+apprunner_services.json 
